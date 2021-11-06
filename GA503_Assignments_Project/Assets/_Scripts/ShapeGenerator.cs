@@ -44,6 +44,9 @@ public class ShapeGenerator : MonoBehaviour
             GameObject go = GameObject.Instantiate(blockPrefab);
             go.transform.position = startPosition + new Vector3(0, blockSize.y * i, startPosition.z);
             go.transform.rotation = Quaternion.Euler(0f, 15f * i, 0f);
+            
+            Renderer rend = go.GetComponent<Renderer>();
+            rend.material.SetColor("_Color", Color.HSVToRGB(((float)i/height), 1f, 1f));
         }
     }
 
@@ -60,6 +63,9 @@ public class ShapeGenerator : MonoBehaviour
                 GameObject go = GameObject.Instantiate(blockPrefab);
                 float startX = -(blockSize.x * yIndex) / 2f;
                 go.transform.position = startPosition + new Vector3(startX + (blockSize.x * xIndex), blockSize.y * -yIndex, startPosition.z);
+                
+                Renderer rend = go.GetComponent<Renderer>();
+                rend.material.SetColor("_Color", Color.HSVToRGB(((float)yIndex/height), Mathf.Lerp(0.5f, 1f, ((float)xIndex/yIndex)), 1f));
             }
         }
     }
