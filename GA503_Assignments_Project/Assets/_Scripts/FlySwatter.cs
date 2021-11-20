@@ -1,0 +1,30 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FlySwatter : MonoBehaviour
+{
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip missSound;
+    [SerializeField] private AudioClip hitSound;
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.rigidbody && hit.rigidbody.tag == "Enemy")
+                {
+                    audioSource.PlayOneShot(hitSound);
+                    Destroy(hit.rigidbody.gameObject);
+                    return;
+                }
+            }
+            audioSource.PlayOneShot(missSound);
+        }
+    }
+}
