@@ -63,3 +63,5 @@ crashlytics-build.properties
 **/.idea
 **/Plugins/Editor/
 
+**/Packages/com.unity.probuilder/
+**/EditorUserSettings.asset
